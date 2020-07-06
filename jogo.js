@@ -42,6 +42,10 @@ const planoDeFundo = {
   },
 };
 
+const teto = {
+  y: 0,
+}
+
 // [Chao]
 function criaChao() {
     const chao = {
@@ -88,7 +92,18 @@ function fazColisao(flappyBird, chao) {
 
   return false;
 }
-  // [Flappy Bird]
+
+function fazColisaoTeto(flappyBird, ceu) {
+  const flappyBirdY = globais.flappyBird.y;
+  const ceuY = ceu.y;
+
+  if(flappyBirdY <= ceuY) {
+    return true;
+  };
+  return false;
+}
+
+// [Flappy Bird]
 function criaFlappyBird() {
   const flappyBird = {
     spriteX: 0,
@@ -111,6 +126,11 @@ function criaFlappyBird() {
           mudaParaTela(Telas.INICIO)
         },500);
         return;
+      };
+
+      if(fazColisaoTeto(flappyBird, teto)) {
+        flappyBird.y = 0;
+        flappyBird.velocidade = 0;
       };
   
       flappyBird.velocidade = flappyBird.velocidade + flappyBird.gravidade;
