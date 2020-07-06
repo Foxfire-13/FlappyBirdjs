@@ -187,7 +187,7 @@ function criaCanos() {
     desenha() {
       canos.pares.forEach(function(par) {
         const yRandom = par.y;
-        const espacoEntreCanos = 100;
+        const espacoEntreCanos = 90;
 
         const canoCeuX = par.x;
         const canoCeuY = yRandom;
@@ -228,16 +228,15 @@ function criaCanos() {
       const cabecaFlappy = globais.flappyBird.y;
       const peFlappy = globais.flappyBird.y + globais.flappyBird.altura;
 
-      if(globais.flappyBird.x >= par.x) {
+      if(globais.flappyBird.x >= par.x - 35) {
 
         if(cabecaFlappy <= par.canoCeu.y) {
           return true;
         };
 
-        if(peFlappy >= par.canoChao.x + 300) {
+        if(peFlappy >= par.canoChao.y) {
           return true;
         };
-        //return true;
       };
 
       return false;
@@ -253,7 +252,7 @@ function criaCanos() {
       };
 
       canos.pares.forEach(function(par) {
-        par.x = par.x - 2;
+        par.x = par.x - 1;
 
         if(canos.temColisao(par)) {
           mudaParaTela(Telas.INICIO);
