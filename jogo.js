@@ -318,7 +318,6 @@ const Telas = {
     },
     atualiza() {
       globais.chao.atualiza();
-      
     }
   }
 };
