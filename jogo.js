@@ -57,7 +57,7 @@ function criaChao() {
     y: canvas.height - 112,
     atualiza() {
       const movimentoDoChao = 1;
-      const repeteEm = chao.largura / 2;
+      const repeteEm = chao.largura / 4 ;
       const movimentacao = chao.x - movimentoDoChao
       chao.x = movimentacao % repeteEm;
     },
@@ -75,6 +75,22 @@ function criaChao() {
         chao.spriteX, chao.spriteY,
         chao.largura, chao.altura,
         (chao.x + chao.largura), chao.y,
+        chao.largura, chao.altura,
+      );
+
+      contexto.drawImage(
+        sprites,
+        chao.spriteX, chao.spriteY,
+        chao.largura, chao.altura,
+        (chao.x + chao.largura), chao.y,
+        chao.largura, chao.altura,
+      );
+
+      contexto.drawImage(
+        sprites,
+        chao.spriteX, chao.spriteY,
+        chao.largura, chao.altura,
+        (chao.x + 2 * chao.largura), chao.y,
         chao.largura, chao.altura,
       );
     },
@@ -103,6 +119,7 @@ function fazColisaoTeto(flappyBird, ceu) {
   return false;
 }
 
+let salto = true;
 // [Flappy Bird]
 function criaFlappyBird() {
   const flappyBird = {
@@ -116,15 +133,16 @@ function criaFlappyBird() {
     velocidade: 0,
     pulo: 4.6,
     pula() {
-      flappyBird.velocidade = - flappyBird.pulo;
+      if(salto){
+        flappyBird.velocidade = - flappyBird.pulo;
+      }
     },
     atualiza() {
       if(fazColisao(flappyBird, globais.chao)) {
-        som_HIT.play();
-
-        setTimeout(() => {
-          mudaParaTela(Telas.INICIO)
-        },500);
+        globais.flappyBird.x --
+        //setTimeout(() => {
+          //mudaParaTela(Telas.INICIO)
+        //},500);
         return;
       };
 
@@ -275,8 +293,8 @@ function criaCanos() {
         par.x = par.x - 1;
 
         if(canos.temColisao(par)) {
-          mudaParaTela(Telas.INICIO);
-          som_HIT.play();
+          salto = false;
+          globais.flappyBird.x --;
         };
 
         if(par.x + canos.largura <= 0) {
