@@ -318,7 +318,7 @@ const Telas = {
     },
     atualiza() {
       globais.chao.atualiza();
-      globais.canos.atualiza();
+      
     }
   }
 };
